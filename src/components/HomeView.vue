@@ -1,109 +1,77 @@
 <template>
-  <div class="about">
-    <h1 class="title">ESTHER SIMON'S GITHUB REPO</h1>
-    <hr class="break" />
-    <div class="avatar-area">
-        <img src="https://avatars.githubusercontent.com/u/93126974?v=4" alt="">
+  <section class="container">
+    <div class="avatar">
+      <img :src= "profile.avatar_url" />
     </div>
-    <div class="socials">
-      <a class="social-link twitter" href="https://twitter.com/JustTalis">
-        <p><i class="fa-brands fa-twitter"></i> Esther Simon</p>
-      </a>
-      <a class="social-link linkedin" href="https://www.linkedin.com/in/esther-simon-956a65227/">
-        <p><i class="fa-brands fa-linkedin"></i> Esther Simon</p>
-      </a>
-    </div>
-    <p>
-      I'm passionate about software engineering and currently learning how to build web apps with
-      HTML, CSS, React, Vue and Javascript. I will love to be part of tech communities and
-      contribute to open-source projects.
-    </p>
 
-    <img
-      src="https://github-readme-stats.vercel.app/api/top-langs/?username=just-talis&langs_count=8&layout=compact&hide_border=true"
-      alt="Esther's GitHub stats"
-    />
-  </div>
+    <div class="about">
+      <h2>{{ profile.name }}</h2>
+      <p>
+        {{ profile.bio }}
+      </p>
+      <p>Repos: {{ profile.public_repos }} | Following: {{ profile.following }} | Followers: {{ profile.followers }}</p>
+      <a href="/list"><button>View Repos</button></a>
+    </div>
+  </section>
 </template>
 
-<style>
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.about {
-  /* border: 1px solid grey; */
-  box-shadow: 0px 0px 2px #0000006c;
-  width: max-content;   
-  margin: 25px auto 0;
-  border-radius: 0.5rem;
-
-  padding: 10px 25px;
-  color: rgb(47, 44, 44);
-}
-
-.avatar-area{
-    width: max-content;
-    margin: 0 auto;
-}
-
-.avatar-area img{
-    width: 150px;
-    border-radius: 50px;
-}
-
-.title {
-  text-align: center;
-}
-
-.break {
-  
-  color: rgb(177, 173, 173);
- 
-}
-
-img{
-    text-align: center;
-}
-
-.social-link {
+<style scoped>
+.container {
+  margin: 90px auto;
   display: flex;
-  background-color: rgb(128, 128, 249);
-  color: white;
-  width: 150px;
   align-items: center;
-  gap: 8px;
-  padding: 0 8px;
-  height: 30px;
+  max-width: 900px;
+  gap: 50px;
 }
 
-.twitter{
-background-color: #00acee;
+p,
+span {
+  color: rgba(128, 124, 124, 0.775);
 }
 
-.linkedin{
-  background-color: #0077b5;
+img {
+  border-radius: 140px;
+  border: solid 15px white;
+  overflow: hidden;
+  box-shadow: 0 0 20px 10px #ddd;
+  height: 250px;
+  width: 250px;
 }
 
-.socials{
-display: flex;
-gap: 8px;
+button {
+  background-color: white;
+  color: rgb(84, 84, 84);
+  border-radius: 50px;
+  padding: 10px 15px;
+  border: solid 1px rgb(97, 147, 97);
+  transition: 0.5s;
+  cursor: pointer;
 }
 
-
-@media screen and (max-width: 800px) {
-  
-  .socials{
-    display: block;
-   
-  }
-  .social-link{
-    width: 100%;
-    margin: 5px 0;
-    justify-content: center;
-  }
+button:hover {
+  background-color: rgb(97, 147, 97);
+  color: white;
 }
+/* .avatar {
+  border-radius: 140px;
+  border: solid 15px white;
+  overflow: hidden;
+  box-shadow: 0 0 20px 20px #ddd;
+} */
 </style>
+
+<script>
+import { ref, onMounted } from 'vue'
+
+export default {
+  setup() {
+    const profile = ref({})
+    onMounted(async () => {
+      const response = await fetch(`https://api.github.com/users/just-talis`)
+      const data = await response.json()
+      profile.value = data
+    })
+    return { profile }
+  }
+}
+</script>

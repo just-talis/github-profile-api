@@ -11,7 +11,7 @@
       </p>
       <p>Repos: {{ profile.public_repos }} | Following: {{ profile.following }} | Followers: {{ profile.followers }}</p>
       <!-- <a href="/list"><button>View Repos</button></a> -->
-      <router-link to="/list">View Repos</router-link>
+      <router-link to="/list"><button>View Repos</button></router-link>
     </div>
   </section>
 </template>

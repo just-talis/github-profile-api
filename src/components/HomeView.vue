@@ -10,7 +10,8 @@
         {{ profile.bio }}
       </p>
       <p>Repos: {{ profile.public_repos }} | Following: {{ profile.following }} | Followers: {{ profile.followers }}</p>
-      <a href="/list"><button>View Repos</button></a>
+      <!-- <a href="/list"><button>View Repos</button></a> -->
+      <router-link to="/list">View Repos</router-link>
     </div>
   </section>
 </template>
